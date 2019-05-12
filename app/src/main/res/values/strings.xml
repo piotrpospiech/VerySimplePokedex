@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Very simple Pokédex</string>
+
+    <!-- SearchView -->
+    <string name="searchEditText">Enter the pokemon\'s name</string>
+    <string name="searchButton">Search</string>
+    <string name="name">Name:</string>
+    <string name="types">Types:</string>
+    <string name="weight">Weight:</string>
+</resources>
