@@ -95,7 +95,8 @@ class SearchView : AppCompatActivity(), SearchView {
         val weight = pokemon?.weight
         weightResultTextView.text = weight.toString()
 
-        dataConstraintLayout.visibility = View.VISIBLE
+        if(name != null) dataConstraintLayout.visibility = View.VISIBLE
+        else dataConstraintLayout.visibility = View.INVISIBLE
     }
 
     override fun initializeStetho() {
