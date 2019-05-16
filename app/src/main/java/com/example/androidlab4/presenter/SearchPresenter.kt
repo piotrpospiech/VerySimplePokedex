@@ -1,24 +1,21 @@
 package com.example.androidlab4.presenter
 
-import com.example.androidlab4.model.pokemon.Pokemon
-import com.example.androidlab4.view.SearchView
+import com.example.androidlab4.model.Pokemon.Pokemon
+import com.example.androidlab4.model.Pokemon.Type
+import com.example.androidlab4.model.PokemonModel
+import com.example.androidlab4.view.SearchActivity
 
-class SearchPresenter(private val view: SearchView) {
+class SearchPresenter(private val view: SearchActivity) {
+
+    var pokemon: Pokemon? = null
+    private val pokemonModel = PokemonModel()
 
     fun searchPokemon(name: String) {
-        view.searchPokemon(name)
+        pokemonModel.searchPokemon(this, name)
     }
 
-    fun initializeTools() {
-        view.initializeStetho()
-        view.initializeRetrofit()
+    fun onFinished(frontUrl: String?, backUrl: String?, name: String?, types: List<Type>?, weight: Int?) {
+        view.updatePokemonImage(frontUrl, backUrl)
+        view.updatePokemonData(name, types, weight)
     }
-}
-
-interface SearchView {
-    fun searchPokemon(name: String)
-    fun updatePokemonImage(pokemon: Pokemon?)
-    fun updatePokemonData(pokemon: Pokemon?)
-    fun initializeStetho()
-    fun initializeRetrofit()
 }

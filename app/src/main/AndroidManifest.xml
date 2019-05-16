@@ -12,7 +12,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.SearchView">
+        <activity android:name=".view.SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

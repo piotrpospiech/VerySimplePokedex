@@ -1,4 +1,4 @@
-package com.example.androidlab4.model.pokemon
+package com.example.androidlab4.model.Pokemon
 
 data class VersionGroupDetail(
     val level_learned_at: Int,

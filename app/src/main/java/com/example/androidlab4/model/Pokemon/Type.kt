@@ -1,4 +1,4 @@
-package com.example.androidlab4.model.pokemon
+package com.example.androidlab4.model.Pokemon
 
 data class Type(
     val slot: Int,

@@ -1,6 +1,6 @@
 package com.example.androidlab4.model
 
-import com.example.androidlab4.model.pokemon.Pokemon
+import com.example.androidlab4.model.Pokemon.Pokemon
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
