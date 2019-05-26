@@ -17,7 +17,7 @@ class SearchActivity : AppCompatActivity(), SearchView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
-        Stetho.initializeWithDefaults(this)
+
 
         searchButton.setOnClickListener {
             presenter.searchPokemon(pokemonNameEditText.text.toString())
