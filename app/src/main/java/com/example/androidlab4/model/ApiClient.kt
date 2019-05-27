@@ -10,7 +10,6 @@ object ApiClient {
     private const val BASE_URL = "https://pokeapi.co/api/v2/"
     private var retrofit: Retrofit? = null
 
-
     fun getClient(): Retrofit? {
         if (retrofit == null) {
             val client = OkHttpClient.Builder()

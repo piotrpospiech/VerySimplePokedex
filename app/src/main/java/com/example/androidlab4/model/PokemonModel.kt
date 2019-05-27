@@ -6,12 +6,8 @@ import com.example.androidlab4.presenter.SearchPresenter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
 
-class PokemonModel() {
-
-    // for the future
-    //@Inject lateinit var api: Retrofit
+class PokemonModel {
 
     fun searchPokemon(onFinishedListener: SearchPresenter, searchName: String) {
         val api = ApiClient.getClient()?.create(Api::class.java)
@@ -33,7 +29,6 @@ class PokemonModel() {
             }
         })
     }
-
 
     private fun getData(onFinishedListener: SearchPresenter, pokemon: Pokemon?) {
         val name = pokemon?.name
