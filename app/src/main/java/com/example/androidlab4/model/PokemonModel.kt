@@ -1,6 +1,8 @@
 package com.example.androidlab4.model
 
 import android.util.Log
+import com.example.androidlab4.di.component.DaggerPokemonModelComponent
+import com.example.androidlab4.di.module.PokemonModelModule
 import com.example.androidlab4.model.Pokemon.Pokemon
 import com.example.androidlab4.presenter.SearchPresenter
 import retrofit2.Call
@@ -9,11 +11,17 @@ import retrofit2.Response
 
 class PokemonModel {
 
-    fun searchPokemon(onFinishedListener: SearchPresenter, searchName: String) {
-        val api = ApiClient.getClient()?.create(Api::class.java)
-        val call = api?.getPokemon(searchName)
+    private val api: ApiServiceInterface = ApiServiceInterface.create()
 
-        call?.enqueue(object: Callback<Pokemon> {
+    fun setup() {
+        DaggerPokemonModelComponent.create().inject(PokemonModelModule())
+    }
+
+    fun searchPokemon(onFinishedListener: SearchPresenter, searchName: String) {
+
+        val call = api.getPokemon(searchName)
+
+        call.enqueue(object: Callback<Pokemon> {
             override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
                 if(response.code() == 200) {
                     val pokemon = response.body()

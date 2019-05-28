@@ -11,6 +11,7 @@ class SearchPresenter {
 
     fun attach(view: SearchView) {
         this.view = view
+        pokemonModel.setup()
     }
 
     fun searchPokemon(name: String) {
