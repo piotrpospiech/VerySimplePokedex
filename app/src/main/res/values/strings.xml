@@ -4,7 +4,4 @@
     <!-- SearchView -->
     <string name="searchEditText">Enter pokemon\'s name</string>
     <string name="searchButton">Search</string>
-    <string name="name">Name:</string>
-    <string name="types">Types:</string>
-    <string name="weight">Weight:</string>
 </resources>
