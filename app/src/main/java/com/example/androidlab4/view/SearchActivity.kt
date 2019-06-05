@@ -7,7 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import com.example.androidlab4.R
 import com.example.androidlab4.adapter.PokemonDataAdapter
-import com.example.androidlab4.di.component.DaggerSearchActivityComponent
+import com.example.androidlab4.di.DaggerSearchActivityComponent
 import com.example.androidlab4.presenter.SearchPresenter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_search.*
@@ -48,8 +48,8 @@ class SearchActivity : AppCompatActivity(), SearchView {
     }
 
     private fun injectDependency() {
-        val activityComponent = DaggerSearchActivityComponent.create()
-        activityComponent.inject(this)
+        val searchActivityComponent = DaggerSearchActivityComponent.create()
+        searchActivityComponent.inject(this)
     }
 
     private fun setupDataList() {

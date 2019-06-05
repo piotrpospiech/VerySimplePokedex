@@ -7,10 +7,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class PokemonModel {
 
+    lateinit var api: ApiServiceInterface
+
+    fun setup() {
+        api = ApiServiceInterface.create()
+    }
+
     fun searchPokemon(onFinishedListener: SearchPresenter, searchName: String) {
-        val api = ApiServiceInterface.create()
         val call = api.getPokemon(searchName)
 
         call.enqueue(object: Callback<Pokemon> {
