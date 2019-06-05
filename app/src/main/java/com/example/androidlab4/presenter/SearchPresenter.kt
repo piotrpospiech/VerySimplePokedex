@@ -4,15 +4,15 @@ import com.example.androidlab4.model.Pokemon.Type
 import com.example.androidlab4.model.PokemonModel
 import com.example.androidlab4.utils.Constants
 import com.example.androidlab4.view.SearchView
+import javax.inject.Inject
 
-class SearchPresenter {
+class SearchPresenter @Inject constructor() {
 
     private val pokemonModel = PokemonModel()
     private lateinit var view: SearchView
 
     fun attach(view: SearchView) {
         this.view = view
-        pokemonModel.setup()
     }
 
     fun searchPokemon(name: String) {
