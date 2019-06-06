@@ -2,7 +2,9 @@ package com.example.androidlab4
 
 import com.example.androidlab4.model.PokemonModel
 import com.example.androidlab4.presenter.SearchPresenter
+import com.example.androidlab4.utils.Constants
 import com.example.androidlab4.view.SearchView
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -43,5 +45,15 @@ class SearchPresenterTest {
         searchPresenter.searchPokemon(exampleName)
         verify(pokemonModel).searchPokemon(searchPresenter, exampleName)
     }
+
+    @Test
+    fun searchPokemon_SecretString_ShouldWork() {
+        val secretString = "123456789012345678901234567"
+        searchPresenter.searchPokemon(secretString)
+        Assert.assertEquals(secretString.length, Constants.SECRET_STRING_LENGHT)
+        verify(view).showSecretToast()
+    }
+
+
 
 }

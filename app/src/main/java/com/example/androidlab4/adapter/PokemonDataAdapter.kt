@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.example.androidlab4.R
 import kotlinx.android.synthetic.main.list_item.view.*
 
-class PokemonDataAdapter(private val items: ArrayList<ArrayList<String>>,
+open class PokemonDataAdapter(private val items: ArrayList<ArrayList<String>>,
                          private val context: Context): RecyclerView.Adapter<PokemonDataAdapter.ViewHolder>() {
 
     inner class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
@@ -30,7 +30,7 @@ class PokemonDataAdapter(private val items: ArrayList<ArrayList<String>>,
         holder.contentTextView?.text = items[position][1]
     }
 
-    fun updateData(items: ArrayList<ArrayList<String>>?) {
+    open fun updateData(items: ArrayList<ArrayList<String>>?) {
         if(!items.isNullOrEmpty()) {
             this.items.clear()
             this.items.addAll(items)

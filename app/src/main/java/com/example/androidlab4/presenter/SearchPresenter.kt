@@ -16,13 +16,17 @@ open class SearchPresenter @Inject constructor() {
         this.pokemonModel = pokemonModel
     }
 
-    open fun searchPokemon(name: String?) {
+    fun searchPokemon(name: String?) {
         if(!name.isNullOrBlank()) {
-            pokemonModel.searchPokemon(this, name)
+            if(name.length == Constants.SECRET_STRING_LENGHT) {
+                view.showSecretToast()
+            } else {
+                pokemonModel.searchPokemon(this, name)
+            }
         }
     }
 
-    fun onFinished(frontUrl: String?, backUrl: String?, name: String?, types: List<Type>?, weight: Int?) {
+    open fun onFinished(frontUrl: String?, backUrl: String?, name: String?, types: List<Type>?, weight: Int?) {
         val pokemonData: ArrayList<ArrayList<String>> = ArrayList()
 
         pokemonData.add(getName(name))

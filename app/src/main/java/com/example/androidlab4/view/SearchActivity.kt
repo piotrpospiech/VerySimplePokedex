@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import com.example.androidlab4.R
 import com.example.androidlab4.adapter.PokemonDataAdapter
 import com.example.androidlab4.di.DaggerSearchActivityComponent
@@ -14,12 +15,12 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_search.*
 import javax.inject.Inject
 
-class SearchActivity : AppCompatActivity(), SearchView {
+open class SearchActivity : AppCompatActivity(), SearchView {
 
     @Inject
     lateinit var presenter: SearchPresenter
 
-    private lateinit var pokemonDataAdapter: PokemonDataAdapter
+    lateinit var pokemonDataAdapter: PokemonDataAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +47,10 @@ class SearchActivity : AppCompatActivity(), SearchView {
             dataConstraintLayout.visibility = View.VISIBLE
             pokemonDataAdapter.updateData(pokemonData)
         }
+    }
+
+    override fun showSecretToast() {
+        Toast.makeText(this, "Secret toast!", Toast.LENGTH_SHORT).show()
     }
 
     private fun injectDependency() {

@@ -6,5 +6,6 @@ class Constants {
         const val NAME = "Name:"
         const val TYPES = "Types:"
         const val WEIGHT = "Weight:"
+        const val SECRET_STRING_LENGHT = 27
     }
 }
