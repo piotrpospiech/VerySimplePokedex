@@ -11,19 +11,14 @@ open class SearchPresenter @Inject constructor() {
     private lateinit var pokemonModel: PokemonModel
     private lateinit var view: SearchView
 
-    fun attach(view: SearchView, pokemonModel: PokemonModel) {
+    fun setup(view: SearchView) {
         this.view = view
-        this.pokemonModel = pokemonModel
+        pokemonModel = PokemonModel()
+        pokemonModel.setup()
     }
 
     fun searchPokemon(name: String?) {
-        if(!name.isNullOrBlank()) {
-            if(name.length == Constants.SECRET_STRING_LENGHT) {
-                view.showSecretToast()
-            } else {
-                pokemonModel.searchPokemon(this, name)
-            }
-        }
+        pokemonModel.searchPokemon(this, name)
     }
 
     open fun onFinished(frontUrl: String?, backUrl: String?, name: String?, types: List<Type>?, weight: Int?) {

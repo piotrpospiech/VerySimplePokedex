@@ -4,9 +4,9 @@ import com.example.androidlab4.model.PokemonModel
 import com.example.androidlab4.presenter.SearchPresenter
 import org.junit.Before
 import org.junit.Test
+import org.mockito.Matchers
 import org.mockito.Mock
-import org.mockito.Mockito.never
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 
 class PokemonModelTest {
@@ -24,6 +24,7 @@ class PokemonModelTest {
     @Test
     fun searchPokemon_NullString_NoSearch() {
         pokemonModel.searchPokemon(searchPresenter, null)
-        verify(searchPresenter, never()).onFinished("", "", "", ArrayList(), 0)
+        verify(searchPresenter, never())
+            .onFinished(Matchers.anyString(), Matchers.anyString(), Matchers.anyString(), eq(ArrayList()), eq(0))
     }
 }

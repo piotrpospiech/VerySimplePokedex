@@ -1,17 +1,32 @@
 package com.example.androidlab4.model
 
 import android.util.Log
+import com.example.androidlab4.di.DaggerModelInjector
+import com.example.androidlab4.di.ModelInjector
+import com.example.androidlab4.di.NetworkModule
 import com.example.androidlab4.model.Pokemon.Pokemon
 import com.example.androidlab4.presenter.SearchPresenter
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
 
 open class PokemonModel {
 
+    private var injector: ModelInjector = DaggerModelInjector
+        .builder()
+        .networkModule(NetworkModule)
+        .build()
+
+    @Inject
+    lateinit var api: ApiServiceInterface
+
+    fun setup() {
+        injector.inject(this)
+    }
+
     open fun searchPokemon(onFinishedListener: SearchPresenter, searchName: String?) {
-        val api = ApiServiceInterface.create()
         if(!searchName.isNullOrBlank()) {
             val call: Call<Pokemon>? = api.getPokemon(searchName)
             call?.enqueue(object: Callback<Pokemon> {

@@ -1,7 +1,7 @@
 package com.example.androidlab4.view
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.ImageView
@@ -9,7 +9,6 @@ import android.widget.Toast
 import com.example.androidlab4.R
 import com.example.androidlab4.adapter.PokemonDataAdapter
 import com.example.androidlab4.di.DaggerSearchActivityComponent
-import com.example.androidlab4.model.PokemonModel
 import com.example.androidlab4.presenter.SearchPresenter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_search.*
@@ -27,8 +26,7 @@ open class SearchActivity : AppCompatActivity(), SearchView {
         setContentView(R.layout.activity_search)
         injectDependency()
         setupDataList()
-
-        presenter.attach(this, PokemonModel())
+        presenter.setup(this)
 
         searchButton.setOnClickListener {
             presenter.searchPokemon(pokemonNameEditText.text.toString())

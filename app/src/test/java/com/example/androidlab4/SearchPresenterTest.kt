@@ -2,14 +2,11 @@ package com.example.androidlab4
 
 import com.example.androidlab4.model.PokemonModel
 import com.example.androidlab4.presenter.SearchPresenter
-import com.example.androidlab4.utils.Constants
 import com.example.androidlab4.view.SearchView
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.never
-import org.mockito.Mockito.verify
+import org.mockito.Mockito.*
 import org.mockito.MockitoAnnotations
 
 class SearchPresenterTest {
@@ -24,7 +21,7 @@ class SearchPresenterTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         searchPresenter = SearchPresenter()
-        searchPresenter.attach(view, pokemonModel)
+        searchPresenter.setup(view)
     }
 
     @Test
@@ -35,6 +32,7 @@ class SearchPresenterTest {
 
     @Test
     fun searchPokemon_NullString_NoSearch() {
+        //`when`(pokemonModel.searchPokemon()).then()
         searchPresenter.searchPokemon(null)
         verify(pokemonModel, never()).searchPokemon(searchPresenter, null)
     }
@@ -50,7 +48,6 @@ class SearchPresenterTest {
     fun searchPokemon_SecretString_ShouldWork() {
         val secretString = "123456789012345678901234567"
         searchPresenter.searchPokemon(secretString)
-        Assert.assertEquals(secretString.length, Constants.SECRET_STRING_LENGHT)
         verify(view).showSecretToast()
     }
 
