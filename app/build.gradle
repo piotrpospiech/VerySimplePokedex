@@ -50,4 +50,7 @@ dependencies {
     // dagger2
     implementation 'com.google.dagger:dagger:2.23.1'
     kapt 'com.google.dagger:dagger-compiler:2.23.1'
+
+    // mockito
+    testImplementation group: 'org.mockito', name: 'mockito-all', version: '1.10.19'
 }

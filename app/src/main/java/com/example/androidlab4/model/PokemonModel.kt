@@ -8,32 +8,28 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class PokemonModel {
+open class PokemonModel {
 
-    lateinit var api: ApiServiceInterface
-
-    fun setup() {
-        api = ApiServiceInterface.create()
-    }
-
-    fun searchPokemon(onFinishedListener: SearchPresenter, searchName: String) {
-        val call = api.getPokemon(searchName)
-
-        call.enqueue(object: Callback<Pokemon> {
-            override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
-                if(response.code() == 200) {
-                    val pokemon = response.body()
-                    getData(onFinishedListener, pokemon)
+    open fun searchPokemon(onFinishedListener: SearchPresenter, searchName: String?) {
+        val api = ApiServiceInterface.create()
+        if(!searchName.isNullOrBlank()) {
+            val call: Call<Pokemon>? = api.getPokemon(searchName)
+            call?.enqueue(object: Callback<Pokemon> {
+                override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
+                    if(response.code() == 200) {
+                        val pokemon = response.body()
+                        getData(onFinishedListener, pokemon)
+                    }
+                    else {
+                        Log.d("PokemonModel", "Failed to get pokemon")
+                    }
                 }
-                else {
-                    Log.d("PokemonModel", "Failed to get pokemon")
-                }
-            }
 
-            override fun onFailure(call: Call<Pokemon>, t: Throwable) {
-                Log.d("PokemonModel", t.message)
-            }
-        })
+                override fun onFailure(call: Call<Pokemon>, t: Throwable) {
+                    Log.d("PokemonModel", t.message)
+                }
+            })
+        }
     }
 
     private fun getData(onFinishedListener: SearchPresenter, pokemon: Pokemon?) {

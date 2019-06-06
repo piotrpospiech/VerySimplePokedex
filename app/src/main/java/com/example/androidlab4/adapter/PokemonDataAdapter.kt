@@ -30,10 +30,12 @@ class PokemonDataAdapter(private val items: ArrayList<ArrayList<String>>,
         holder.contentTextView?.text = items[position][1]
     }
 
-    fun updateData(items: ArrayList<ArrayList<String>>) {
-        this.items.clear()
-        this.items.addAll(items)
-        notifyDataSetChanged()
+    fun updateData(items: ArrayList<ArrayList<String>>?) {
+        if(!items.isNullOrEmpty()) {
+            this.items.clear()
+            this.items.addAll(items)
+            notifyDataSetChanged()
+        }
     }
 
 }

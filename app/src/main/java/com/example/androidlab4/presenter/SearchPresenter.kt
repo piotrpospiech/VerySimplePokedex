@@ -6,30 +6,40 @@ import com.example.androidlab4.utils.Constants
 import com.example.androidlab4.view.SearchView
 import javax.inject.Inject
 
-class SearchPresenter @Inject constructor() {
+open class SearchPresenter @Inject constructor() {
 
-    private val pokemonModel = PokemonModel()
+    private lateinit var pokemonModel: PokemonModel
     private lateinit var view: SearchView
 
-    fun attach(view: SearchView) {
+    fun attach(view: SearchView, pokemonModel: PokemonModel) {
         this.view = view
-        pokemonModel.setup()
+        this.pokemonModel = pokemonModel
     }
 
-    fun searchPokemon(name: String) {
-        pokemonModel.searchPokemon(this, name)
+    open fun searchPokemon(name: String?) {
+        if(!name.isNullOrBlank()) {
+            pokemonModel.searchPokemon(this, name)
+        }
     }
 
     fun onFinished(frontUrl: String?, backUrl: String?, name: String?, types: List<Type>?, weight: Int?) {
         val pokemonData: ArrayList<ArrayList<String>> = ArrayList()
 
-        // name
+        pokemonData.add(getName(name))
+        pokemonData.add(getTypes(types))
+        pokemonData.add(getTypes(weight))
+
+        view.updatePokemon(frontUrl, backUrl, pokemonData)
+    }
+
+    private fun getName(name: String?): ArrayList<String> {
         val nameList = ArrayList<String>()
         nameList.add(Constants.NAME)
         nameList.add(name?.capitalize().toString())
-        pokemonData.add(nameList)
+        return nameList
+    }
 
-        // types
+    private fun getTypes(types: List<Type>?): ArrayList<String> {
         val typesResult = StringBuilder()
 
         if(types != null) {
@@ -42,14 +52,13 @@ class SearchPresenter @Inject constructor() {
         val typesList = ArrayList<String>()
         typesList.add(Constants.TYPES)
         typesList.add(typesResult.toString())
-        pokemonData.add(typesList)
+        return typesList
+    }
 
-        // weight
+    private fun getTypes(weight: Int?): ArrayList<String> {
         val weightList = ArrayList<String>()
         weightList.add(Constants.WEIGHT)
         weightList.add("${weight?.div(10.0)} kg")
-        pokemonData.add(weightList)
-
-        view.updatePokemon(frontUrl, backUrl, pokemonData)
+        return weightList
     }
 }

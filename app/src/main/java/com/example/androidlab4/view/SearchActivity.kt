@@ -8,6 +8,7 @@ import android.widget.ImageView
 import com.example.androidlab4.R
 import com.example.androidlab4.adapter.PokemonDataAdapter
 import com.example.androidlab4.di.DaggerSearchActivityComponent
+import com.example.androidlab4.model.PokemonModel
 import com.example.androidlab4.presenter.SearchPresenter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_search.*
@@ -26,14 +27,14 @@ class SearchActivity : AppCompatActivity(), SearchView {
         injectDependency()
         setupDataList()
 
-        presenter.attach(this)
+        presenter.attach(this, PokemonModel())
 
         searchButton.setOnClickListener {
             presenter.searchPokemon(pokemonNameEditText.text.toString())
         }
     }
 
-    override fun updatePokemon(frontUrl: String?, backUrl: String?, pokemonData: ArrayList<ArrayList<String>>) {
+    override fun updatePokemon(frontUrl: String?, backUrl: String?, pokemonData: ArrayList<ArrayList<String>>?) {
         updateImage(frontUrl, frontPokemonImageView)
         updateImage(backUrl, backPokemonImageView)
 
