@@ -1,4 +1,4 @@
-package com.example.androidlab4.di
+package com.example.androidlab4.di.component
 
 import com.example.androidlab4.presenter.SearchPresenter
 import com.example.androidlab4.view.SearchActivity

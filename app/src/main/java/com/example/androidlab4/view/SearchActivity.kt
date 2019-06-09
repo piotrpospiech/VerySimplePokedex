@@ -1,14 +1,13 @@
 package com.example.androidlab4.view
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.androidlab4.R
 import com.example.androidlab4.adapter.PokemonDataAdapter
-import com.example.androidlab4.di.DaggerSearchActivityComponent
+import com.example.androidlab4.di.component.DaggerSearchActivityComponent
 import com.example.androidlab4.presenter.SearchPresenter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_search.*
@@ -19,7 +18,7 @@ open class SearchActivity : AppCompatActivity(), SearchView {
     @Inject
     lateinit var presenter: SearchPresenter
 
-    lateinit var pokemonDataAdapter: PokemonDataAdapter
+    private lateinit var pokemonDataAdapter: PokemonDataAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +29,7 @@ open class SearchActivity : AppCompatActivity(), SearchView {
 
         searchButton.setOnClickListener {
             presenter.searchPokemon(pokemonNameEditText.text.toString())
+
         }
     }
 
@@ -57,7 +57,7 @@ open class SearchActivity : AppCompatActivity(), SearchView {
     }
 
     private fun setupDataList() {
-        dataListRecyclerView.layoutManager = LinearLayoutManager(this)
+        dataListRecyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         pokemonDataAdapter = PokemonDataAdapter(ArrayList(), this)
         dataListRecyclerView.adapter = pokemonDataAdapter
     }

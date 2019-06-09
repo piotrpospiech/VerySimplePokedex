@@ -1,4 +1,4 @@
-package com.example.androidlab4.di
+package com.example.androidlab4.di.module
 
 import com.example.androidlab4.model.ApiServiceInterface
 import com.example.androidlab4.utils.Constants.Companion.BASE_URL
@@ -11,7 +11,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
-object NetworkModule {
+object ApiModule {
 
     @Provides
     @Reusable
