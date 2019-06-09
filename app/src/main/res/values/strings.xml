@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Very simple Pokédex</string>
+    <string name="app_name">Pokéfinder</string>
 
     <!-- SearchView -->
     <string name="searchEditText">Enter pokemon\'s name</string>

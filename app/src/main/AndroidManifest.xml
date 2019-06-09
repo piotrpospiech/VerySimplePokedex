@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.example.androidlab4">
+          package="com.example.pokefinder">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <application
-            android:name=".app.ApplicationPokemon"
+            android:name="com.example.pokefinder.app.ApplicationPokemon"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
@@ -15,7 +15,7 @@
             tools:ignore="GoogleAppIndexingWarning">
         <activity
                 android:configChanges="orientation|screenSize"
-                android:name=".view.SearchActivity">
+                android:name="com.example.pokefinder.view.SearchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
