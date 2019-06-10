@@ -1,4 +1,4 @@
-package com.example.androidlab4.model.db
+package com.example.pokefinder.model.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

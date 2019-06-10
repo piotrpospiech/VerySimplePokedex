@@ -6,7 +6,7 @@ import com.example.pokefinder.utils.Constants
 import com.example.pokefinder.view.SearchView
 import javax.inject.Inject
 
-open class SearchPresenter @Inject constructor() {
+class SearchPresenter @Inject constructor() {
 
     private lateinit var pokemonModel: PokemonModel
     private lateinit var view: SearchView
@@ -18,15 +18,20 @@ open class SearchPresenter @Inject constructor() {
     }
 
     fun searchPokemon(name: String?) {
-        pokemonModel.searchPokemon(this, name)
+        if (!name.isNullOrBlank()) pokemonModel.searchPokemon(this, name)
+        else sendMessage(Constants.MESSAGE_WRONG_INPUT)
     }
 
-    open fun onFinished(frontUrl: String?, backUrl: String?, name: String?, types: List<Type>?, weight: Int?) {
+    fun sendMessage(message: String) {
+        view.showToast(message)
+    }
+
+    fun onFinished(frontUrl: String?, backUrl: String?, name: String?, types: List<Type>?, weight: Int?) {
         val pokemonData: ArrayList<ArrayList<String>> = ArrayList()
 
         pokemonData.add(getName(name))
         pokemonData.add(getTypes(types))
-        pokemonData.add(getTypes(weight))
+        pokemonData.add(getWeight(weight))
 
         view.updatePokemon(frontUrl, backUrl, pokemonData)
     }
@@ -54,7 +59,7 @@ open class SearchPresenter @Inject constructor() {
         return typesList
     }
 
-    private fun getTypes(weight: Int?): ArrayList<String> {
+    private fun getWeight(weight: Int?): ArrayList<String> {
         val weightList = ArrayList<String>()
         weightList.add(Constants.WEIGHT)
         weightList.add("${weight?.div(10.0)} kg")

@@ -8,12 +8,13 @@ import com.example.pokefinder.model.Pokemon.Pokemon
 import com.example.pokefinder.model.db.PokemonEntity
 import com.example.pokefinder.model.db.PokemonRepository
 import com.example.pokefinder.presenter.SearchPresenter
+import com.example.pokefinder.utils.Constants
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-open class PokemonModel {
+class PokemonModel {
 
     private lateinit var pokemonRepository: PokemonRepository
 
@@ -32,7 +33,7 @@ open class PokemonModel {
         pokemonRepository.deleteAll()
     }
 
-    open fun searchPokemon(onFinishedListener: SearchPresenter, searchName: String?) {
+    fun searchPokemon(onFinishedListener: SearchPresenter, searchName: String?) {
         pokemonRepository.getAllPokemons()
         if(!searchName.isNullOrBlank()) {
             val call: Call<Pokemon>? = api.getPokemon(searchName)
@@ -45,9 +46,9 @@ open class PokemonModel {
                     }
                     else {
                         Log.d("PokemonModel", "Failed to get pokemon")
+                        onFinishedListener.sendMessage(Constants.CANNOT_FIND_POKEMON)
                     }
                 }
-
                 override fun onFailure(call: Call<Pokemon>, t: Throwable) {
                     Log.d("PokemonModel", t.message)
                     for (i in pokemonRepository.allPokemons) {
@@ -61,31 +62,24 @@ open class PokemonModel {
     }
 
     private fun getData(onFinishedListener: SearchPresenter, pokemon: Pokemon?) {
-        val name = pokemon?.name
-
-        val types = pokemon?.types
-        val typesResult = StringBuilder()
-        types?.forEach {
-            typesResult.append(it.type.name)
-            typesResult.append(", ")
-        }
-
-        val weight = pokemon?.weight
-        val frontUrl = pokemon?.sprites?.front_default
-        val backUrl = pokemon?.sprites?.back_default
-
-        onFinishedListener.onFinished(frontUrl, backUrl, name, types, weight)
+        onFinishedListener.onFinished(
+            pokemon?.sprites?.front_default,
+            pokemon?.sprites?.back_default,
+            pokemon?.name,
+            pokemon?.types,
+            pokemon?.weight
+        )
     }
 
     private fun storageInDB(pokemon: Pokemon?) {
         if(pokemon != null) {
-            val name = pokemon.name
-            val types = pokemon.types
-            val weight = pokemon.weight
-            val frontUrl = pokemon.sprites.front_default
-            val backUrl = pokemon.sprites.back_default
-
-            val pokemonResult = PokemonEntity(name, types, weight, frontUrl, backUrl)
+            val pokemonResult = PokemonEntity(
+                pokemon.name,
+                pokemon.types,
+                pokemon.weight,
+                pokemon.sprites.front_default,
+                pokemon.sprites.back_default
+            )
             pokemonRepository.savePokemon(pokemonResult)
         }
     }

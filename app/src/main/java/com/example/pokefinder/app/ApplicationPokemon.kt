@@ -5,11 +5,13 @@ import com.facebook.stetho.Stetho
 
 class ApplicationPokemon: Application() {
 
+    init {
+        instance = this
+    }
+
     override fun onCreate() {
         super.onCreate()
         Stetho.initializeWithDefaults(this)
-
-        instance = this
     }
 
     companion object {

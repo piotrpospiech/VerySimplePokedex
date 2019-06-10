@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pokefinder.R
 import com.example.pokefinder.adapter.PokemonDataAdapter
+import com.example.pokefinder.app.ApplicationPokemon
 import com.example.pokefinder.di.component.DaggerSearchActivityComponent
 import com.example.pokefinder.presenter.SearchPresenter
 import com.squareup.picasso.Picasso
@@ -29,7 +30,6 @@ open class SearchActivity : AppCompatActivity(), SearchView {
 
         searchButton.setOnClickListener {
             presenter.searchPokemon(pokemonNameEditText.text.toString())
-
         }
     }
 
@@ -38,17 +38,14 @@ open class SearchActivity : AppCompatActivity(), SearchView {
         updateImage(backUrl, backPokemonImageView)
 
         pokemonNameEditText.text.clear()
-        if(frontUrl.isNullOrBlank()) {
-            dataConstraintLayout.visibility = View.GONE
-        }
-        else {
+        if(!frontUrl.isNullOrBlank()) {
             dataConstraintLayout.visibility = View.VISIBLE
             pokemonDataAdapter.updateData(pokemonData)
         }
     }
 
-    override fun showSecretToast() {
-        Toast.makeText(this, "Secret toast!", Toast.LENGTH_SHORT).show()
+    override fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun injectDependency() {

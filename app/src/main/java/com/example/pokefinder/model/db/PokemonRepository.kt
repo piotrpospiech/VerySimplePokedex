@@ -1,9 +1,9 @@
-package com.example.androidlab4.model.db
+package com.example.pokefinder.model.db
 
 import android.os.AsyncTask
-import com.example.androidlab4.di.component.DaggerPokemonRepositoryComponent
-import com.example.androidlab4.di.component.PokemonRepositoryComponent
-import com.example.androidlab4.di.module.DatabaseModule
+import com.example.pokefinder.di.component.DaggerPokemonRepositoryComponent
+import com.example.pokefinder.di.component.PokemonRepositoryComponent
+import com.example.pokefinder.di.module.DatabaseModule
 import javax.inject.Inject
 
 class PokemonRepository {
@@ -23,8 +23,6 @@ class PokemonRepository {
         allPokemons  = emptyList()
         pokemonDao = pokemonDatabase.pokemonDao()
     }
-
-    //private val pokemonDao = PokemonDatabase.getDatabase().pokemonDao()
 
     fun getAllPokemons() {
         PokemonRepository.GetAllAsyncTask(pokemonDao, this).execute()
@@ -52,14 +50,14 @@ class PokemonRepository {
 
     private class InsertAsyncTask internal constructor(private val dao: PokemonDao, private val pokemonRepository: PokemonRepository) : AsyncTask<PokemonEntity, Void,  Void>() {
         override fun doInBackground(vararg params: PokemonEntity): Void? {
-            var b = false
+            var isInDatabase = false
             for (i in pokemonRepository.allPokemons) {
                 if (i.name == params[0].name) {
-                    b = true
+                    isInDatabase = true
                     break
                 }
             }
-            if (!b) {
+            if (!isInDatabase) {
                 dao.insert(params[0])
             }
             return null
