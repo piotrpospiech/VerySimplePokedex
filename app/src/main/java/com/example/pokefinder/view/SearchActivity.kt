@@ -7,14 +7,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pokefinder.R
 import com.example.pokefinder.adapter.PokemonDataAdapter
-import com.example.pokefinder.app.ApplicationPokemon
 import com.example.pokefinder.di.component.DaggerSearchActivityComponent
+import com.example.pokefinder.di.component.SearchActivityComponent
+import com.example.pokefinder.di.module.SearchPresenterModule
 import com.example.pokefinder.presenter.SearchPresenter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_search.*
 import javax.inject.Inject
 
 open class SearchActivity : AppCompatActivity(), SearchView {
+
+    private var component: SearchActivityComponent = DaggerSearchActivityComponent
+        .builder()
+        .presenterBuilder(SearchPresenterModule)
+        .build()
 
     @Inject
     lateinit var presenter: SearchPresenter
@@ -49,8 +55,7 @@ open class SearchActivity : AppCompatActivity(), SearchView {
     }
 
     private fun injectDependency() {
-        val searchActivityComponent = DaggerSearchActivityComponent.create()
-        searchActivityComponent.inject(this)
+        component.inject(this)
     }
 
     private fun setupDataList() {
