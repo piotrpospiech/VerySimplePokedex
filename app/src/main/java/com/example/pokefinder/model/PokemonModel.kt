@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.pokefinder.di.component.DaggerPokemonModelComponent
 import com.example.pokefinder.di.component.PokemonModelComponent
 import com.example.pokefinder.di.module.ApiModule
+import com.example.pokefinder.di.module.RepositoryModule
 import com.example.pokefinder.model.Pokemon.Pokemon
 import com.example.pokefinder.model.db.PokemonEntity
 import com.example.pokefinder.model.db.PokemonRepository
@@ -16,19 +17,19 @@ import javax.inject.Inject
 
 class PokemonModel {
 
-    private lateinit var pokemonRepository: PokemonRepository
-
     private var component: PokemonModelComponent = DaggerPokemonModelComponent
         .builder()
         .apiModule(ApiModule)
+        .repositoryModule(RepositoryModule)
         .build()
 
     @Inject
     lateinit var api: ApiServiceInterface
+    @Inject
+    lateinit var pokemonRepository: PokemonRepository
 
     fun setup() {
         component.inject(this)
-        pokemonRepository = PokemonRepository()
         pokemonRepository.setup()
         pokemonRepository.deleteAll()
     }
