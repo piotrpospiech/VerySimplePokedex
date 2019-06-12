@@ -23,7 +23,6 @@ class SearchPresenter {
     fun setup(view: SearchView) {
         component.inject(this)
         this.view = view
-        pokemonModel = PokemonModel()
         pokemonModel.setup()
     }
 
