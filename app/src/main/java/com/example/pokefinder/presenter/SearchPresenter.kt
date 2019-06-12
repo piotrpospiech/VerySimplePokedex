@@ -1,17 +1,27 @@
 package com.example.pokefinder.presenter
 
+import com.example.pokefinder.di.component.DaggerSearchPresenterComponent
+import com.example.pokefinder.di.component.SearchPresenterComponent
+import com.example.pokefinder.di.module.PokemonModelModule
 import com.example.pokefinder.model.Pokemon.Type
 import com.example.pokefinder.model.PokemonModel
 import com.example.pokefinder.utils.Constants
 import com.example.pokefinder.view.SearchView
 import javax.inject.Inject
 
-class SearchPresenter @Inject constructor() {
+class SearchPresenter {
 
-    private lateinit var pokemonModel: PokemonModel
+    private var component: SearchPresenterComponent = DaggerSearchPresenterComponent
+        .builder()
+        .modelModule(PokemonModelModule)
+        .build()
+
+    @Inject
+    lateinit var pokemonModel: PokemonModel
     private lateinit var view: SearchView
 
     fun setup(view: SearchView) {
+        component.inject(this)
         this.view = view
         pokemonModel = PokemonModel()
         pokemonModel.setup()
