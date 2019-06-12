@@ -15,7 +15,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class PokemonModel @Inject constructor() {
+class PokemonModel {
 
     private var component: PokemonModelComponent = DaggerPokemonModelComponent
         .builder()
