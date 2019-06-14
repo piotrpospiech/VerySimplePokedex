@@ -10,6 +10,7 @@ import com.example.pokefinder.model.db.PokemonEntity
 import com.example.pokefinder.model.db.PokemonRepository
 import com.example.pokefinder.presenter.SearchPresenter
 import com.example.pokefinder.utils.Constants
+import org.jetbrains.anko.doAsync
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -31,11 +32,9 @@ class PokemonModel {
     fun setup() {
         component.inject(this)
         pokemonRepository.setup()
-        pokemonRepository.deleteAll()
     }
 
     fun searchPokemon(onFinishedListener: SearchPresenter, searchName: String?) {
-        pokemonRepository.getAllPokemons()
         if(!searchName.isNullOrBlank()) {
             val call: Call<Pokemon>? = api.getPokemon(searchName)
             call?.enqueue(object: Callback<Pokemon> {
@@ -81,7 +80,7 @@ class PokemonModel {
                 pokemon.sprites.front_default,
                 pokemon.sprites.back_default
             )
-            pokemonRepository.savePokemon(pokemonResult)
+            doAsync { pokemonRepository.savePokemon(pokemonResult) }
         }
     }
 }

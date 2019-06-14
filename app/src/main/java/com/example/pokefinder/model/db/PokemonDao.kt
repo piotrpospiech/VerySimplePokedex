@@ -15,5 +15,5 @@ interface PokemonDao {
     fun insert(pokemon: PokemonEntity)
 
     @Query("DELETE FROM pokemon_table")
-    fun delete()
+    fun deleteAll()
 }
