@@ -1,6 +1,5 @@
 package com.example.pokefinder.model.db
 
-import android.os.AsyncTask
 import com.example.pokefinder.di.component.DaggerPokemonRepositoryComponent
 import com.example.pokefinder.di.component.PokemonRepositoryComponent
 import com.example.pokefinder.di.module.DatabaseModule
@@ -34,40 +33,5 @@ class PokemonRepository {
 
     fun deleteAll() {
         pokemonDao.delete()
-    }
-
-    private class GetAllAsyncTask internal constructor(private val dao: PokemonDao, private val pokemonRepository: PokemonRepository) : AsyncTask<Void, Void, List<PokemonEntity>>() {
-        override fun doInBackground(vararg params: Void?): List<PokemonEntity>? {
-            return dao.getAll()
-        }
-
-        override fun onPostExecute(result: List<PokemonEntity>) {
-            super.onPostExecute(result)
-            pokemonRepository.allPokemons = result
-        }
-
-    }
-
-    private class InsertAsyncTask internal constructor(private val dao: PokemonDao, private val pokemonRepository: PokemonRepository) : AsyncTask<PokemonEntity, Void,  Void>() {
-        override fun doInBackground(vararg params: PokemonEntity): Void? {
-            var isInDatabase = false
-            for (i in pokemonRepository.allPokemons) {
-                if (i.name == params[0].name) {
-                    isInDatabase = true
-                    break
-                }
-            }
-            if (!isInDatabase) {
-                dao.insert(params[0])
-            }
-            return null
-        }
-    }
-
-    private class DeleteAsyncTask internal constructor(private val dao: PokemonDao) : AsyncTask<Void, Void, Void>() {
-        override fun doInBackground(vararg params: Void?): Void? {
-            dao.delete()
-            return null
-        }
     }
 }
