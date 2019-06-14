@@ -32,7 +32,6 @@ class PokemonModel {
     fun setup() {
         component.inject(this)
         pokemonRepository.setup()
-        doAsync { pokemonRepository.deleteAll() }
     }
 
     fun searchPokemon(onFinishedListener: SearchPresenter, searchName: String?) {

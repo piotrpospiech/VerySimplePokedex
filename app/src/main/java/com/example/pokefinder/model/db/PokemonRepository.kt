@@ -3,6 +3,7 @@ package com.example.pokefinder.model.db
 import com.example.pokefinder.di.component.DaggerPokemonRepositoryComponent
 import com.example.pokefinder.di.component.PokemonRepositoryComponent
 import com.example.pokefinder.di.module.DatabaseModule
+import org.jetbrains.anko.doAsync
 import javax.inject.Inject
 
 class PokemonRepository {
@@ -19,19 +20,24 @@ class PokemonRepository {
 
     fun setup() {
         component.inject(this)
-        allPokemons  = emptyList()
+        doAsync { allPokemons = getAll() }
         pokemonDao = pokemonDatabase.pokemonDao()
     }
 
-    fun getAll(): List<PokemonEntity> {
+    private fun getAll(): List<PokemonEntity> {
         return pokemonDao.getAll()
     }
 
     fun savePokemon(pokemon: PokemonEntity) {
+        if (allPokemons.size > 20)  {
+            deleteAll()
+            allPokemons = listOf()
+        }
         pokemonDao.insert(pokemon)
+        allPokemons = getAll()
     }
 
     fun deleteAll() {
-        pokemonDao.delete()
+        pokemonDao.deleteAll()
     }
 }
