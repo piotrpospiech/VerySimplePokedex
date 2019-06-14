@@ -35,7 +35,6 @@ class PokemonModel {
     }
 
     fun searchPokemon(onFinishedListener: SearchPresenter, searchName: String?) {
-        pokemonRepository.getAllPokemons()
         if(!searchName.isNullOrBlank()) {
             val call: Call<Pokemon>? = api.getPokemon(searchName)
             call?.enqueue(object: Callback<Pokemon> {

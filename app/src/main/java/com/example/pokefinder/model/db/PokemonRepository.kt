@@ -24,8 +24,8 @@ class PokemonRepository {
         pokemonDao = pokemonDatabase.pokemonDao()
     }
 
-    fun getAllPokemons() {
-        PokemonRepository.GetAllAsyncTask(pokemonDao, this).execute()
+    fun getAll(): List<PokemonEntity> {
+        return pokemonDao.getAll()
     }
 
     fun savePokemon(pokemon: PokemonEntity) {
