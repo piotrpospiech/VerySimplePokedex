@@ -33,7 +33,7 @@ class PokemonRepository {
     }
 
     fun deleteAll() {
-        PokemonRepository.DeleteAsyncTask(pokemonDao).execute()
+        pokemonDao.delete()
     }
 
     private class GetAllAsyncTask internal constructor(private val dao: PokemonDao, private val pokemonRepository: PokemonRepository) : AsyncTask<Void, Void, List<PokemonEntity>>() {
