@@ -29,7 +29,7 @@ class PokemonRepository {
     }
 
     fun savePokemon(pokemon: PokemonEntity) {
-        PokemonRepository.InsertAsyncTask(pokemonDao, this).execute(pokemon)
+        pokemonDao.insert(pokemon)
     }
 
     fun deleteAll() {
