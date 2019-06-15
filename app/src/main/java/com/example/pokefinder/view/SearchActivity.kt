@@ -13,6 +13,7 @@ import com.example.pokefinder.di.module.SearchPresenterModule
 import com.example.pokefinder.presenter.SearchPresenter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_search.*
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 open class SearchActivity : AppCompatActivity(), SearchView {
@@ -51,7 +52,7 @@ open class SearchActivity : AppCompatActivity(), SearchView {
     }
 
     override fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        toast(message)
     }
 
     private fun injectDependency() {
