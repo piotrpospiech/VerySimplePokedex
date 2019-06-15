@@ -11,6 +11,7 @@ import com.example.pokefinder.model.db.PokemonRepository
 import com.example.pokefinder.presenter.SearchPresenter
 import com.example.pokefinder.utils.Constants
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.doAsyncResult
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,11 +52,8 @@ class PokemonModel {
                 }
                 override fun onFailure(call: Call<Pokemon>, t: Throwable) {
                     Log.d("PokemonModel", t.message)
-                    for (i in pokemonRepository.allPokemons) {
-                        if (i.name == searchName) {
-                            onFinishedListener.onFinished(i.frontUrl, i.backUrl, i.name, i.types, i.weight)
-                        }
-                    }
+                    val pokemon = doAsyncResult { pokemonRepository.getByName(searchName) }.get()
+                    onFinishedListener.onFinished(pokemon.frontUrl, pokemon.backUrl, pokemon.name, pokemon.types, pokemon.weight)
                 }
             })
         }

@@ -1,14 +1,15 @@
 package com.example.pokefinder.model.db
 
+import android.util.Log
 import com.example.pokefinder.di.component.DaggerPokemonRepositoryComponent
 import com.example.pokefinder.di.component.PokemonRepositoryComponent
 import com.example.pokefinder.di.module.DatabaseModule
-import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.doAsyncResult
 import javax.inject.Inject
 
 class PokemonRepository {
 
-    lateinit var allPokemons: List<PokemonEntity>
+    private var databaseSize: Int = 0
     private var component: PokemonRepositoryComponent = DaggerPokemonRepositoryComponent
         .builder()
         .databaseModule(DatabaseModule)
@@ -20,24 +21,29 @@ class PokemonRepository {
 
     fun setup() {
         component.inject(this)
-        doAsync { allPokemons = getAll() }
         pokemonDao = pokemonDatabase.pokemonDao()
+        databaseSize = doAsyncResult { getSize() }.get()
+        Log.d("PokemonRepository", "DB size after setup: $databaseSize")
     }
 
-    private fun getAll(): List<PokemonEntity> {
-        return pokemonDao.getAll()
+    private fun getSize(): Int {
+        return pokemonDao.getSize()
+    }
+
+    fun getByName(name: String): PokemonEntity {
+        return pokemonDao.getByName(name)
     }
 
     fun savePokemon(pokemon: PokemonEntity) {
-        if (allPokemons.size > 20)  {
+        if (databaseSize > 10)  {
             deleteAll()
-            allPokemons = listOf()
+            databaseSize = 0
         }
         pokemonDao.insert(pokemon)
-        allPokemons = getAll()
+        databaseSize++
     }
 
-    fun deleteAll() {
+    private fun deleteAll() {
         pokemonDao.deleteAll()
     }
 }
