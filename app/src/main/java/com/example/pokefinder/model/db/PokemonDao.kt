@@ -8,8 +8,8 @@ import androidx.room.Query
 @Dao
 interface PokemonDao {
 
-    @Query("SELECT * FROM pokemon_table")
-    fun getAll(): List<PokemonEntity>
+    @Query("SELECT COUNT(name) FROM pokemon_table")
+    fun getSize(): Int
 
     @Query("SELECT * FROM pokemon_table WHERE name LIKE :name")
     fun getByName(name: String): PokemonEntity
