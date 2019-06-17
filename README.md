@@ -8,11 +8,11 @@ In this application, you can search for pokemon data. For this purpose, I used t
 I also implemented a local database to storage last searched pokemons. It is useful when you don't have a stable Internet connection.</br>
 </br>
 
-**Technologies used**
-
+**Technologies used**</br>
 Dagger 2</br>
 Room</br>
 Retrofit</br>
+Anko</br>
 Mockito & Unit tests</br>
 Gson</br>
 Recycler View</br>
