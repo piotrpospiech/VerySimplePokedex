@@ -2,8 +2,7 @@
 
 <img src="https://github.com/piotrpospiech/Pokefinder/blob/master/media/app_preview.png" alt="app preview" width="272" height="436" align="left"> 
 
-**About the project**
-
+**About the project**</br>
 In this application, you can search for pokemon data. For this purpose, I used the REST API called PokéAPI.</br>
 I also implemented a local database to storage last searched pokemons. It is useful when you don't have a stable Internet connection.</br>
 </br>
