@@ -10,6 +10,7 @@ import com.example.pokefinder.di.component.DaggerSearchActivityComponent
 import com.example.pokefinder.di.component.SearchActivityComponent
 import com.example.pokefinder.di.module.SearchPresenterModule
 import com.example.pokefinder.presenter.SearchPresenter
+import com.example.pokefinder.utils.Constants
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_search.*
 import org.jetbrains.anko.toast
@@ -67,7 +68,7 @@ open class SearchActivity : AppCompatActivity(), SearchView {
     private fun updateImage(imgUrl: String?, imageView: ImageView) {
         Picasso.get()
             .load(imgUrl)
-            .resize(400, 400)
+            .resize(Constants.IMAGE_SIZE, Constants.IMAGE_SIZE)
             .centerCrop()
             .into(imageView)
     }
