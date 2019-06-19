@@ -45,7 +45,7 @@ open class SearchActivity : AppCompatActivity(), SearchView {
 
         pokemonNameEditText.text.clear()
         if(!frontUrl.isNullOrBlank()) {
-            dataConstraintLayout.visibility = View.VISIBLE
+            pokemonImageLinearLayout.visibility = View.VISIBLE
             pokemonDataAdapter.updateData(pokemonData)
         }
     }
