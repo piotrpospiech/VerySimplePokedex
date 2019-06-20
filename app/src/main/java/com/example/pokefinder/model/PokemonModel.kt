@@ -40,7 +40,7 @@ class PokemonModel {
             val call: Call<Pokemon>? = api.getPokemon(searchName)
             call?.enqueue(object: Callback<Pokemon> {
                 override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
-                    if(response.code() == 200) {
+                    if(response.code() == Constants.RESPONSE_OK) {
                         val pokemon = response.body()
                         storageInDB(pokemon)
                         getData(onFinishedListener, pokemon)

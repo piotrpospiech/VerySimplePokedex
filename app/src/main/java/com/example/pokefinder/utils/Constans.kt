@@ -15,5 +15,6 @@ class Constants {
         const val BACK_URL = "back_url"
 
         const val IMAGE_SIZE = 400
+        const val RESPONSE_OK = 200
     }
 }
