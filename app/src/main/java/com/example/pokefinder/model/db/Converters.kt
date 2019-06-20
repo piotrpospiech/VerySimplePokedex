@@ -1,7 +1,7 @@
 package com.example.pokefinder.model.db
 
 import androidx.room.TypeConverter
-import com.example.pokefinder.model.Pokemon.Type
+import com.example.pokefinder.model.pokemon.Type
 import com.google.gson.Gson
 import java.util.*
 import com.google.gson.reflect.TypeToken

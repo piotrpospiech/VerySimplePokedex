@@ -1,4 +1,4 @@
-package com.example.pokefinder.model.Pokemon
+package com.example.pokefinder.model.pokemon
 
 data class Sprites(
     val back_default: String,

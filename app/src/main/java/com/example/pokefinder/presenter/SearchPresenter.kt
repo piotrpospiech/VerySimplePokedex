@@ -3,7 +3,7 @@ package com.example.pokefinder.presenter
 import com.example.pokefinder.di.component.DaggerSearchPresenterComponent
 import com.example.pokefinder.di.component.SearchPresenterComponent
 import com.example.pokefinder.di.module.PokemonModelModule
-import com.example.pokefinder.model.Pokemon.Type
+import com.example.pokefinder.model.pokemon.Type
 import com.example.pokefinder.model.PokemonModel
 import com.example.pokefinder.utils.Constants
 import com.example.pokefinder.view.SearchView

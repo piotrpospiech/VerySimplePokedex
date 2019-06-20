@@ -1,6 +1,6 @@
 package com.example.pokefinder.model
 
-import com.example.pokefinder.model.Pokemon.Pokemon
+import com.example.pokefinder.model.pokemon.Pokemon
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

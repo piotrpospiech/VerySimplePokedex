@@ -1,8 +1,8 @@
 package com.example.pokefinder
 
 import com.example.pokefinder.app.ApplicationPokemon
-import com.example.pokefinder.model.Pokemon.Type
-import com.example.pokefinder.model.Pokemon.TypeX
+import com.example.pokefinder.model.pokemon.Type
+import com.example.pokefinder.model.pokemon.TypeX
 import com.example.pokefinder.model.PokemonModel
 import com.example.pokefinder.presenter.SearchPresenter
 import com.example.pokefinder.utils.Constants

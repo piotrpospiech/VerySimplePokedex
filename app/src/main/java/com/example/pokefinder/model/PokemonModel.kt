@@ -5,7 +5,7 @@ import com.example.pokefinder.di.component.DaggerPokemonModelComponent
 import com.example.pokefinder.di.component.PokemonModelComponent
 import com.example.pokefinder.di.module.ApiModule
 import com.example.pokefinder.di.module.RepositoryModule
-import com.example.pokefinder.model.Pokemon.Pokemon
+import com.example.pokefinder.model.pokemon.Pokemon
 import com.example.pokefinder.model.db.PokemonEntity
 import com.example.pokefinder.model.db.PokemonRepository
 import com.example.pokefinder.presenter.SearchPresenter
