@@ -13,8 +13,8 @@ open class PokemonDataAdapter(private val items: ArrayList<ArrayList<String>>,
                          private val context: Context): RecyclerView.Adapter<PokemonDataAdapter.ViewHolder>() {
 
     inner class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
-        val titleTextView: TextView? = view.titleTextView
-        val contentTextView: TextView? = view.contentTextView
+        private val titleTextView: TextView? = view.titleTextView
+        private val contentTextView: TextView? = view.contentTextView
 
         fun bind(title: String, content: String) {
             titleTextView?.text = title
