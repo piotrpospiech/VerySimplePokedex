@@ -15,6 +15,11 @@ open class PokemonDataAdapter(private val items: ArrayList<ArrayList<String>>,
     inner class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView? = view.titleTextView
         val contentTextView: TextView? = view.contentTextView
+
+        fun bind(title: String, content: String) {
+            titleTextView?.text = title
+            contentTextView?.text = content
+        }
     }
 
     override fun getItemCount(): Int {
@@ -26,8 +31,7 @@ open class PokemonDataAdapter(private val items: ArrayList<ArrayList<String>>,
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.titleTextView?.text = items[position][0]
-        holder.contentTextView?.text = items[position][1]
+        holder.bind(items[position][0], items[position][1])
     }
 
     open fun updateData(items: ArrayList<ArrayList<String>>?) {
