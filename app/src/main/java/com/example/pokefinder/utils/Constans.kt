@@ -16,5 +16,6 @@ class Constants {
 
         const val IMAGE_SIZE = 400
         const val RESPONSE_OK = 200
+        const val DATABASE_MAX_SIZE = 10
     }
 }

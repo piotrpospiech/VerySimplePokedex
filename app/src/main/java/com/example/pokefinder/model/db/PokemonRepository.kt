@@ -4,6 +4,7 @@ import android.util.Log
 import com.example.pokefinder.di.component.DaggerPokemonRepositoryComponent
 import com.example.pokefinder.di.component.PokemonRepositoryComponent
 import com.example.pokefinder.di.module.DatabaseModule
+import com.example.pokefinder.utils.Constants
 import org.jetbrains.anko.doAsyncResult
 import javax.inject.Inject
 
@@ -35,7 +36,7 @@ class PokemonRepository {
     }
 
     fun savePokemon(pokemon: PokemonEntity) {
-        if (databaseSize > 10)  {
+        if (databaseSize > Constants.DATABASE_MAX_SIZE)  {
             deleteAll()
             databaseSize = 0
         }
