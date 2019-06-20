@@ -8,7 +8,8 @@ class Constants {
         const val WEIGHT = "Weight:"
         const val MESSAGE_WRONG_INPUT = "Please enter pokemon's name first"
         const val CANNOT_FIND_POKEMON = "Sorry, we can't find this pokemon"
+        const val KG = "kg"
 
-        const val IMAGE_SIZE = 400;
+        const val IMAGE_SIZE = 400
     }
 }
